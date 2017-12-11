@@ -28,7 +28,7 @@ gulp.task( 'sass', function() {
 }) ;
 
 gulp.task('minify', function() {
-    return gulp.src('./src/html/**/*.html')
+    return gulp.src('./src/html/*.html')    
 	.pipe(htmlmin({ collapseWhitespace : true }))
 	.pipe(gulp.dest('./public'))
     	.pipe(reload());   
