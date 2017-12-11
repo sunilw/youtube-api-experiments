@@ -1,8 +1,10 @@
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player_1;
+var player_2 ;
+
 function onYouTubeIframeAPIReady() {
-    
+
     player_1 = new YT.Player('player', {
         height: '390',
         width: '640',
@@ -13,10 +15,23 @@ function onYouTubeIframeAPIReady() {
         }
     });
 
-    
+    player_2 = new YT.Player('player2', {
+        height: '390',
+        width: '640',
+        videoId: 'xYi6rvlpsDU',
+        events: {
+            'onReady':   function() {
+		"Ready player_2" ;
+	    } ,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+
+
 }
 
 function onPlayerReady(event) {
+    console.log("got to onPlayerReady");
     event.target.playVideo();
 }
 
@@ -39,7 +54,7 @@ jQuery(document).ready(function() {
      */
     $.getScript( "https://www.youtube.com/iframe_api" )
         .done(function( script, textStatus ) {
-            console.log("I think this is a success/");
+            console.log("I think this is a success");
         })
         .fail(function( jqxhr, settings, exception ) {
             console.log("Something went wrong when we tried to get and load the youtube scripts");
