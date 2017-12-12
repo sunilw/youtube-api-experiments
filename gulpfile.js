@@ -10,6 +10,15 @@ var combiner = require('stream-combiner2');
 var htmlmin = require('gulp-htmlmin');
 var reload = require('gulp-livereload');
 
+gulp.task('fileinclude', function() {
+  gulp.src(['index.html'])
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('./'));
+});
+
 gulp.task('watch', function () {
     reload.listen() ;
     gulp.watch('./src/sass/**.scss', ['sass'])    ;
