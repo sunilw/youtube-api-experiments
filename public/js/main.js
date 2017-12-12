@@ -17535,13 +17535,28 @@ jQuery(document).ready(function() {
     });
 
     /*
+     *   Function for creating players, so we don't have to repeat code.
+     *
+     */
+
+    function myappCreatePlayer( id, placeholder ) {
+	console.log("About to create video");
+	new YT.Player( placeholder, {
+	    videoId : id,
+	    events : {
+		'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+	    }
+	});	
+    }
+    
+    /*
      * If we get the youtube script, then onYouTubeIframeAPIReady will fire,
      * and will create the iframes
      */
-    var player_1 ;
+
     
     function onYouTubeIframeAPIReady() {
-
 	
         player_1 = new YT.Player('player_1', {	    
             videoId: 'M7lc1UVf-VE',
@@ -17550,7 +17565,11 @@ jQuery(document).ready(function() {
                 'onStateChange': onPlayerStateChange
             }
         });
-    }
+
+	 myappCreatePlayer( 'RryNwynmG6k', 'player_2' ) ;
+	myappCreatePlayer( 'RY-CNTLXmMI', 'player_3' ) ;
+	
+    } // ends onYouTubeIframeAPIReady
 
 
     function onPlayerReady(event) {
