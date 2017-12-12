@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
     
     function onYouTubeIframeAPIReady() {
 	
-        player_1 = new YT.Player('player_1', {	    
+        player_1 = new YT.Player('id-of-element-goes-here', {	    
             videoId: 'M7lc1UVf-VE',
             events: {
                 'onReady': onPlayerReady,
@@ -45,8 +45,12 @@ jQuery(document).ready(function() {
             }
         });
 
-	 myappCreatePlayer( 'RryNwynmG6k', 'player_2' ) ;
-	myappCreatePlayer( 'RY-CNTLXmMI', 'player_3' ) ;
+	myappCreatePlayer( 'RryNwynmG6k', 'player_1' ) ;
+	myappCreatePlayer( 'RY-CNTLXmMI', 'player_2' ) ;
+	myappCreatePlayer('B-_KvoMR4sU', 'player_3') ;
+	myappCreatePlayer('ha9OFDUunMU', 'player_4') ;
+	myappCreatePlayer('4dKlbY2IC-c', 'player_5') ;
+
 	
     } // ends onYouTubeIframeAPIReady
 
