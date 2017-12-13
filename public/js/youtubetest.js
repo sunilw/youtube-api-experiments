@@ -9,8 +9,15 @@ function onYouTubeIframeAPIReady() {
         height: '390',
         width: '640',
         videoId: 'M7lc1UVf-VE',
+
+        playerVars : {
+            'autoplay' : 0 ,
+            'controls' : 0,
+            'modestbranding' : 1
+        },
+
         events: {
-            'onReady': onPlayerReady,
+	    'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
     });
@@ -19,10 +26,17 @@ function onYouTubeIframeAPIReady() {
         height: '390',
         width: '640',
         videoId: 'xYi6rvlpsDU',
+	
+        playerVars : {
+            'autoplay' : 0 ,
+            'controls' : 0,
+            'modestbranding' : 1
+        },
+	
         events: {
             'onReady':   function() {
-		"Ready player_2" ;
-	    } ,
+                "Ready player_2" ;
+            } ,
             'onStateChange': onPlayerStateChange
         }
     });
@@ -43,7 +57,7 @@ function onPlayerStateChange(event) {
     }
 }
 function stopVideo() {
-    player.stopVideo();
+    // player.stopVideo();
 }
 
 

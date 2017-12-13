@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
     /*
      * Create slider
      */
-        var mySwiper = new Swiper ('.swiper-container', {
+    var mySwiper = new Swiper ('.swiper-container', {
         loop: true,
         navigation: {
             nextEl: '.swiper-button-next',
@@ -19,25 +19,50 @@ jQuery(document).ready(function() {
      */
 
     function myappCreatePlayer( id, placeholder ) {
-	console.log("About to create video");
-	new YT.Player( placeholder, {
-	    videoId : id,
-	    events : {
-		'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-	    }
-	});	
+        var player = this.id ;
+        console.log("About to create video");
+        new YT.Player( placeholder, {
+            videoId : id,
+
+            playerVars : {
+                'autoplay' : 0,
+                'controls': 0
+            },
+
+            events : {
+                'onReady': onPlayerReady,
+
+                'onStateChange' : function() {
+                    if (event.data == YT.PlayerState.PLAYING && !done) {
+                        setTimeout( player.stopVideo());
+                        done = true;
+                    }
+                }
+            }
+        });
     }
-    
+
+
+
     /*
      * If we get the youtube script, then onYouTubeIframeAPIReady will fire,
      * and will create the iframes
      */
-
-    
     function onYouTubeIframeAPIReady() {
-	
-        player_1 = new YT.Player('id-of-element-goes-here', {	    
+
+        player_1 = new YT.Player('id-of-element-goes-here', {
+            videoId: 'M7lc1UVf-VE',
+            playerVars : {
+                'autoplay' :  0
+            },
+            events: {
+
+            }
+        });
+
+        player = new YT.Player('player_1', {
+            height: '390',
+            width: '640',
             videoId: 'M7lc1UVf-VE',
             events: {
                 'onReady': onPlayerReady,
@@ -45,13 +70,33 @@ jQuery(document).ready(function() {
             }
         });
 
-	myappCreatePlayer( 'RryNwynmG6k', 'player_1' ) ;
-	myappCreatePlayer( 'RY-CNTLXmMI', 'player_2' ) ;
-	myappCreatePlayer('B-_KvoMR4sU', 'player_3') ;
-	myappCreatePlayer('ha9OFDUunMU', 'player_4') ;
-	myappCreatePlayer('4dKlbY2IC-c', 'player_5') ;
+        player = new YT.Player('player_2', {
+            height: '390',
+            width: '640',
+            videoId: 'M7lc1UVf-VE',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
 
+        player = new YT.Player('player_outside', {
+            height: '390',
+            width: '640',
+            videoId: 'M7lc1UVf-VE',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
 	
+	
+        // myappCreatePlayer( 'RryNwynmG6k', 'player_1' ) ;
+        // myappCreatePlayer( 'RY-CNTLXmMI', 'player_2' ) ;
+        // myappCreatePlayer('B-_KvoMR4sU', 'player_3') ;
+        // myappCreatePlayer('ha9OFDUunMU', 'player_4') ;
+
+
     } // ends onYouTubeIframeAPIReady
 
 
@@ -63,7 +108,7 @@ jQuery(document).ready(function() {
     var done = false;
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
+            setTimeout( player.stopVideo());
             done = true;
         }
     }
@@ -78,7 +123,7 @@ jQuery(document).ready(function() {
     $.getScript( "https://www.youtube.com/iframe_api" )
         .done(function( script, textStatus ) {
             console.log("We successfully got the script from YoutTube");
-	    onYouTubeIframeAPIReady() ;
+            onYouTubeIframeAPIReady() ;
         })
         .fail(function( jqxhr, settings, exception ) {
             console.log("Something went wrong when we tried to get and load the youtube scripts");
